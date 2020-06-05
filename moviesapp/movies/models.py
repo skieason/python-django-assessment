@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -22,4 +22,4 @@ class Movie(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('movies:detail', kwargs={'id': self.pk})
+        return reverse('movies:detail', kwargs={'pk': self.pk})
