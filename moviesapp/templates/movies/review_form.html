@@ -1,0 +1,15 @@
+<h1>{{ object.title }}</h1>
+
+
+<form class="form-horizontal" method="post" 
+  action="{% url 'movies:review' %}"
+  {% csrf_token %}
+  {{ form.as_p }}>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">
+       Create
+      </button>
+    </div>
+  </div>
+</form>

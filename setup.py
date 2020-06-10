@@ -12,7 +12,7 @@ setup(
         'wheel==0.29.0',
         'django==1.11.28',
         'nose==1.3.7',
-        'django-nose==1.4.4',
+        'django-nose==1.4.6',
         'nosedjango==1.0.13'
     ],
     test_suite='tests',
