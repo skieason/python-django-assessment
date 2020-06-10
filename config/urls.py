@@ -1,20 +1,30 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.conf.urls import url
+# from django.conf.urls import url
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
+from rest_framework import routers
+
+from moviesapp.movies.urls import views
+
+router = routers.DefaultRouter()
+router.register('movies', views.MovieViewSet)
+router.register('reviews', views.ReviewViewSet)
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='pages/home.html'), name='home'),
-    path('movies/', include(('moviesapp.movies.urls', 'movies'), namespace='movie')),
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    url(settings.ADMIN_URL, admin.site.urls),  # {% url 'admin:index' %}
+    path('m', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    path('movies/', include(('moviesapp.movies.urls', 'movies'), namespace='movies')),
+
+    path(settings.ADMIN_URL, admin.site.urls),  # {% url 'admin:index' %}
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-app_name = 'movies'
+app_name = 'moviesd'
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.

@@ -12,7 +12,7 @@
   action="{% url 'movies:create' %}"
 {% else %}
   action="{% url 'movies:update' object.pk %}"
-{% endif %}>
+  {% endif %}>
   {% csrf_token %}
   {{ form.as_p }}
   <div class="control-group">
